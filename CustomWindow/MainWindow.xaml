@@ -5,10 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CustomWindow"
         mc:Ignorable="d"
-        WindowStyle="None" Background="AliceBlue" ResizeMode="CanMinimize" 
+        WindowStyle="None" Background="AliceBlue" 
         Title="MainWindow" Height="350" Width="600" 
         StateChanged="Window_StateChanged" LocationChanged="Window_LocationChanged"
         >
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="5"/>
+    </WindowChrome.WindowChrome>
     <Border Name="main" BorderThickness="1" BorderBrush="LightGray" Margin="0">
         <DockPanel>
             <Border Name="border" DockPanel.Dock="Top" Height="25">
