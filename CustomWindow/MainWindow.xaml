@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CustomWindow"
         mc:Ignorable="d"
         WindowStyle="None" Background="AliceBlue" 
         Title="MainWindow" Height="350" Width="600" 
@@ -12,17 +11,20 @@
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0" ResizeBorderThickness="5"/>
     </WindowChrome.WindowChrome>
-    <Border Name="main" BorderThickness="1" BorderBrush="LightGray" Margin="0">
+    <Border Name="main" BorderThickness="1" BorderBrush="Gray" Margin="0">
         <DockPanel>
+            <!-- Title Bar Area --> 
             <Border Name="border" DockPanel.Dock="Top" Height="25">
-                <!-- Title Bar Area -->
+                
                 <Grid>
                     <Label VerticalContentAlignment="Center" Margin="10,0,105,0" PreviewMouseDown="System_MouseDown" PreviewMouseMove="System_MouseMove">
                         <TextBlock Text="{Binding Title, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"/>
                     </Label>
-                    <Grid HorizontalAlignment="Right" Background="White">
-                        <!-- System Button Area -->
-                        <Grid.Resources>
+                    
+                    <!-- System Button Area -->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Background="White">
+                        
+                        <StackPanel.Resources>
                             <Style TargetType="{x:Type Button}" x:Key="systemButton">
                                 <Setter Property="Padding" Value="0"/>
                                 <Setter Property="Width" Value="35"/>
@@ -46,30 +48,15 @@
                                 </Style.Triggers>
 
                             </Style>
-                        </Grid.Resources>
-                        <Button Click="Close_Click">
-                            <Button.Style>
-                                <Style TargetType="Button" BasedOn="{StaticResource systemButton}">
-                                    <Style.Triggers>
-                                        <Trigger Property="Button.IsMouseOver" Value="True">
-                                            <Setter Property="Button.Background" Value="Red" />
-                                        </Trigger>
-                                    </Style.Triggers>
-
-                                </Style>
-                            </Button.Style>
-                            <Canvas Height="25" Width="35">
-                                <Line    
-                                    X1="12" Y1="8" 
-                                    X2="22" Y2="18"    
-                                    Stroke="Black" StrokeThickness="0.75"/>
-                                <Line    
-                                    X1="12" Y1="18"    
-                                    X2="22" Y2="8"  
-                                    Stroke="Black" StrokeThickness="0.75"/>
-                            </Canvas>
+                        </StackPanel.Resources>
+                        
+                        <Button Click="Mimimize_Click" Style="{StaticResource systemButton}">
+                            <Rectangle Width="11"
+                                       Stroke="Black"
+                                       StrokeThickness="0.75"/>
                         </Button>
-                        <Button Margin="0,0,35,0" Click="Maximize_Click"  Style="{DynamicResource systemButton}">
+
+                        <Button Click="Maximize_Click" Style="{StaticResource systemButton}">
                             <Grid>
                                 <Rectangle Name="rectMax" Width="11" Height="11"
                                        Stroke="Black"
@@ -83,17 +70,35 @@
                                 </Canvas>
                             </Grid>
                         </Button>
-                        <Button Margin="0,0,70,0" Click="Mimimize_Click"  Style="{DynamicResource systemButton}">
-                            <Rectangle Width="11"
-                                       Stroke="Black"
-                                       StrokeThickness="0.75"/>
-
+                        
+                        <Button Click="Close_Click">
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource systemButton}">
+                                    <Style.Triggers>
+                                        <Trigger Property="Button.IsMouseOver" Value="True">
+                                            <Setter Property="Button.Background" Value="Red" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Canvas Height="25" Width="35">
+                                <Line    
+                                    X1="12" Y1="8" 
+                                    X2="22" Y2="18"    
+                                    Stroke="Black" StrokeThickness="0.75"/>
+                                <Line    
+                                    X1="12" Y1="18"    
+                                    X2="22" Y2="8"  
+                                    Stroke="Black" StrokeThickness="0.75"/>
+                            </Canvas>
                         </Button>
-                    </Grid>
+                        
+                    </StackPanel>
                 </Grid>
             </Border>
-            <Grid DockPanel.Dock="Bottom">
-                <!-- Content Area -->
+            
+            <!-- Content Area -->
+            <Grid DockPanel.Dock="Bottom">                
                 <Label Content="Content Area" FontSize="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="GreenYellow"/>
             </Grid>
         </DockPanel>
